@@ -39,7 +39,7 @@ class Stream:
         await self._consumer.start()
         self._started = True
 
-        self._task = await asyncio.create_task(
+        self._task = asyncio.create_task(
             self._listener(), name=f"listener-{self._client_id}"
         )
 
