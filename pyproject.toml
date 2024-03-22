@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "streaming-kafka"
+version = "0.1.0"
+description = ""
+authors = ["Marcel Blijleven <marcelblijleven@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiokafka = "^0.10.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+pytest-asyncio = "^0.23.6"
+testcontainers = "^4.1.1"
+ruff = "^0.3.3"
+mypy = "^1.9.0"
+commitizen = "^3.20.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
