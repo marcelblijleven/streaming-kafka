@@ -4,15 +4,25 @@ from typing import Callable, TypeAlias
 
 from aiokafka import ConsumerRecord, AIOKafkaConsumer
 
+from streaming_kafka.settings import Settings
+
 StreamCallback: TypeAlias = Callable[[ConsumerRecord], None]
 
 
 class Stream:
-    def __init__(self, topics: str | list[str], *, client_id: str, callback: StreamCallback):
+    def __init__(
+        self,
+        topics: str | list[str],
+        *,
+        client_id: str,
+        callback: StreamCallback,
+        settings: Settings,
+    ):
         self.topics = topics if isinstance(topics, list) else [topics]
 
         self._client_id = client_id
         self._callback = callback
+        self._settings = settings
         self._task: Future | None = None
         self._consumer: AIOKafkaConsumer | None = None
         self._started = False
@@ -33,7 +43,7 @@ class Stream:
 
         """
         self._consumer = AIOKafkaConsumer(
-            *self.topics, bootstrap_servers="localhost:9092", group_id="test"
+            *self.topics, **self._settings.model_dump(exclude_unset=True)
         )
 
         await self._consumer.start()
