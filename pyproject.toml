@@ -18,6 +18,23 @@ ruff = "^0.3.3"
 mypy = "^1.9.0"
 commitizen = "^3.20.0"
 
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_files = ["mytomorrows/__init__.py"]
+version_schema = "pep440"
+version_provider = "poetry"
+update_changelog_on_bump = true
+
+[tool.ruff]
+extend-exclude = [
+    "docs",
+]
+line-length = 120
+target-version = "py312"
+
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
