@@ -22,7 +22,7 @@ commitizen = "^3.20.0"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-tag_format = "v$version"
+tag_format = "$version"
 version_files = ["streaming_kafka/__init__.py"]
 version_schema = "pep440"
 version_provider = "poetry"
