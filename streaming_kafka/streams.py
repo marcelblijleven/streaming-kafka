@@ -28,6 +28,14 @@ class Stream:
         self._started = False
 
     @property
+    def client_id(self) -> str:
+        """
+        Returns the client id
+
+        """
+        return self._client_id
+
+    @property
     def is_started(self) -> bool:
         """
         Returns True if the stream was started
