@@ -35,7 +35,7 @@ async def main():
     t2_msgs = [b"foo", b"bar", b"baz"]
 
     async with streaming_app:
-        while len(t1_msgs) > 0 and len(t2_msgs) > 0:
+        while len(t1_msgs) > 0 or len(t2_msgs) > 0:
             await asyncio.sleep(1)
 
             if (t1_msg := get_msg(t1_msgs)) is not None:
