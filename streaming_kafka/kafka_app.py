@@ -7,7 +7,7 @@ from streaming_kafka.settings import Settings
 from streaming_kafka.streams import Stream, StreamCallback
 
 
-class KafkaEngine:
+class KafkaApp:
     """
     Provides a single object to interact with when communicating with the Kafka server(s).
     """
@@ -59,7 +59,7 @@ class KafkaEngine:
     async def start(self) -> None:
         """
         Initialises the AIOKafkaProducer and starts all the streams
-        registered to the KafkaEngine.
+        registered to the KafkaApp.
 
         """
         await self._init_producer()
@@ -69,7 +69,7 @@ class KafkaEngine:
 
     async def stop(self) -> None:
         """
-        Stops all the streams registered to the KafkaEngine
+        Stops all the streams registered to the KafkaApp
 
         """
         if self._producer is not None:
