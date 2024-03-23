@@ -1,3 +1,9 @@
+## 0.4.1 (2024-03-23)
+
+### Fix
+
+- premature closing of streaming app because of wrong 'while' condition
+
 ## 0.4.0 (2024-03-23)
 
 ### Feat

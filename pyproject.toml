@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "streaming-kafka"
-version = "0.4.0"
+version = "0.4.1"
 description = ""
 authors = ["Marcel Blijleven <marcelblijleven@gmail.com>"]
 readme = "README.md"
