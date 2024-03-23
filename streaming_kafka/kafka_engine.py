@@ -1,8 +1,10 @@
+from typing import Callable
+
 from aiokafka import AIOKafkaProducer
 from aiokafka.structs import RecordMetadata
 
 from streaming_kafka.settings import Settings
-from streaming_kafka.streams import Stream
+from streaming_kafka.streams import Stream, StreamCallback
 
 
 class KafkaEngine:
@@ -45,6 +47,14 @@ class KafkaEngine:
         """
         fut = await self._producer.send(topic=topic, value=value)
         return await fut
+
+    def register_callback(self, topics: str | list[str], *, client_id: str) -> Callable[[StreamCallback], Stream]:
+        def decorator(func: StreamCallback) -> Stream:
+            stream = Stream(topics, client_id=client_id, callback=func, settings=self._settings)
+            self.add_stream(stream)
+            return stream
+
+        return decorator
 
     async def start(self) -> None:
         """
