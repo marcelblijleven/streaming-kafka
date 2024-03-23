@@ -1,3 +1,9 @@
+## 0.4.0 (2024-03-23)
+
+### Feat
+
+- enable async contextmanager for kafka streaming app
+
 ## 0.3.0 (2024-03-23)
 
 ### Feat
