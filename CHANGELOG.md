@@ -1,3 +1,9 @@
+## 0.3.0 (2024-03-23)
+
+### Feat
+
+- register streams directly on engine
+
 ## v0.2.0 (2024-03-22)
 
 ### Feat
