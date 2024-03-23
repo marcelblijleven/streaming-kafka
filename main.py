@@ -3,22 +3,22 @@ import logging
 
 from aiokafka import ConsumerRecord
 
-from streaming_kafka.kafka_engine import KafkaEngine
+from streaming_kafka.kafka_app import KafkaApp
 from streaming_kafka.settings import Settings
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 settings = Settings(_env_file=".env", _env_prefix="kafka_")
-engine = KafkaEngine(settings=settings)
+app = KafkaApp(settings=settings)
 
 
-@engine.register_callback("t1", client_id="t1-consumer")
+@app.register_callback("t1", client_id="t1-consumer")
 def callback_t1(record: ConsumerRecord) -> None:
     logging.info("received record on topic t1: %s", record)
 
 
-@engine.register_callback("t2", client_id="t2-consumer")
+@app.register_callback("t2", client_id="t2-consumer")
 def callback_t2(record: ConsumerRecord) -> None:
     logging.info("received record on topic t2: %s", record)
 
@@ -31,7 +31,7 @@ def get_msg(queue: list[bytes]) -> bytes | None:
 
 
 async def main():
-    await engine.start()
+    await app.start()
 
     t1_msgs = [b"hello", b"world"]
     t2_msgs = [b"foo", b"bar", b"baz"]
@@ -41,13 +41,13 @@ async def main():
 
         if (t1_msg := get_msg(t1_msgs)) is not None:
             print(f"Producing for t1 {t1_msg=}")
-            await engine.produce("t1", t1_msg)
+            await app.produce("t1", t1_msg)
 
         if (t2_msg := get_msg(t2_msgs)) is not None:
             print(f"Producing for t2 {t2_msg=}")
-            await engine.produce("t2", t2_msg)
+            await app.produce("t2", t2_msg)
 
-    await engine.stop()
+    await app.stop()
 
 if __name__ == "__main__":
     asyncio.run(main())
